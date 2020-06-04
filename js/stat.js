@@ -8,10 +8,10 @@ var GAP = 50;
 var FONT_GAP = 20;
 var HEADING = FONT_GAP * 3;
 var BAR_WIDTH = 40;
-var barMaxHeight = CLOUD_HEIGHT - GAP * 2 - FONT_GAP * 2;
 var USER_COLOR = 'rgba(255, 0, 0, 1)';
 var CLOUD_COLOR = '#fff';
 var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
+var barMaxHeight = CLOUD_HEIGHT - GAP * 2 - FONT_GAP * 2;
 
 var getRandom = function (number) {
   return Math.ceil(Math.random() * number);
@@ -21,12 +21,11 @@ var getBlueWithRandomSaturation = function () {
   return 'hsl(240, ' + getRandom(100) + '%, 50%)';
 };
 
-var renderCloud = function (ctx, x, y, color, shadow) {
-  ctx.fillStyle = shadow;
-  ctx.fillRect(x + GAP / 5, y + GAP / 5, CLOUD_WIDTH, CLOUD_HEIGHT);
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
-
+var renderCloud = function (ctx) {
+  ctx.fillStyle = SHADOW_COLOR;
+  ctx.fillRect(CLOUD_X + GAP / 5, CLOUD_Y + GAP / 5, CLOUD_WIDTH, CLOUD_HEIGHT);
+  ctx.fillStyle = CLOUD_COLOR;
+  ctx.fillRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
 var renderDescription = function (ctx) {
@@ -50,7 +49,7 @@ var getMaxElement = function (arr) {
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR, SHADOW_COLOR);
+  renderCloud(ctx);
   renderDescription(ctx);
 
   ctx.fillStyle = '#000';
